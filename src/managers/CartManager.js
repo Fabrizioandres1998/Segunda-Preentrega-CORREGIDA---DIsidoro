@@ -1,6 +1,7 @@
 import { productManager } from "./ProductManager.js";
 import __dirname from "../dirname.js";
 import fs from "fs";
+import path from "path";
 
 class CartManager {
     constructor(path) {
