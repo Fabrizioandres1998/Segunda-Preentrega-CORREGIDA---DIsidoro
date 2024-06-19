@@ -41,6 +41,6 @@ const io = new Server(httpServer);
 io.on("connection", (socket) => {
     console.log("Nuevo cliente conectado", socket.id);
     socket.on("message", (data) => {
-        console.log("Mensaje recibido", data);
+        console.log(data);
     });
 })
