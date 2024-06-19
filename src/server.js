@@ -8,15 +8,15 @@ import viewsRoutes from "./routes/views.routes.js";
 
 const app = express();
 
-//PORT
+// PORT
 const PORT = 8080;
 
-//App configuracion
+// App configuración
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, "../public")));
 
-//Configuracion handlebars
+// Configuración handlebars
 app.engine("hbs", handlebars.engine({
     extname: "hbs",
     defaultLayout: "main",
@@ -25,24 +25,22 @@ app.engine("hbs", handlebars.engine({
 app.set("view engine", "hbs");
 app.set("views", `${__dirname}/views`);
 
-//Routes
-app.use((req, res, next) => {
-    req.io = io;
-    next();
-});
-app.use("/", viewsRoutes);
-app.use("/api", indexRoutes);
-
+// Configurar middleware para pasar `io`
 const httpServer = app.listen(PORT, () => {
     console.log(`Escuchando en el puerto http://localhost:${PORT}`);
 });
 
-//Confirguracion Socket io
 const io = new Server(httpServer);
+app.use((req, res, next) => {
+    req.io = io;
+    next();
+});
 
+// Routes
+app.use("/", viewsRoutes);
+app.use("/api", indexRoutes);
+
+// Configuración Socket.io
 io.on("connection", (socket) => {
     console.log("Nuevo cliente conectado", socket.id);
-    socket.on("message", (data) => {
-        console.log(data);
-    });
 });

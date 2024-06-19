@@ -1,36 +1,32 @@
 [
   {
-    "id": 1,
-    "title": "Producto de prueba",
-    "description": "Este es un producto de prueba",
-    "price": 100,
+    "id": 8,
+    "title": "Producto de prueba 10",
+    "description": "Este es un producto de prueba 10",
+    "price": 20000,
     "thumbnail": "https://example.com/imagen.jpg",
-    "code": "PRD001",
+    "code": "PRD200",
     "stock": 50,
     "status": true
   },
   {
-    "id": 2,
-    "title": "Producto de prueba 2",
-    "description": "Este es un producto de prueba 2",
-    "price": 1002,
+    "id": 12,
+    "title": "Producto de prueba 1",
+    "description": "Este es un producto de prueba 1",
+    "price": 2000,
     "thumbnail": "https://example.com/imagen.jpg",
-    "code": "PRD001",
+    "code": "PRD100",
     "stock": 50,
     "status": true
   },
   {
-    "id": 3,
-    "title": "Producto de prueba 3",
-    "description": "Este es un producto de prueba 3",
-    "price": 1300,
+    "id": 13,
+    "title": "Producto de prueba 1",
+    "description": "Este es un producto de prueba 1",
+    "price": 2000,
     "thumbnail": "https://example.com/imagen.jpg",
-    "code": "PRD001",
+    "code": "PRD100",
     "stock": 50,
-    "status": true
-  },
-  {
-    "id": 4,
     "status": true
   }
 ]

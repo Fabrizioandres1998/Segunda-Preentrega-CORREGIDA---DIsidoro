@@ -31,7 +31,7 @@ router.post("/products", (req, res) => {
     products.push(newProduct);
     writeProducts(products);
     
-    req.io.emit("productAdded", newProduct); // Emit event
+    req.io.emit("productAdded", newProduct);
 
     res.status(201).send(newProduct);
 });
@@ -42,9 +42,10 @@ router.delete("/products/:id", (req, res) => {
     const newProducts = products.filter(product => product.id !== productId);
     writeProducts(newProducts);
     
-    req.io.emit("productDeleted", productId); // Emit event
+    req.io.emit("productDeleted", productId);
 
     res.status(200).send({ id: productId });
 });
+
 
 export default router;
