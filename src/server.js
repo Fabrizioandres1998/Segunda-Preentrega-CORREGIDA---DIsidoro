@@ -4,8 +4,7 @@ import path from "path";
 import { Server } from "socket.io";
 import indexRoutes from "./routes/index.js";
 import __dirname from "./dirname.js";
-import viewsRoutes from "./routes/views.routes.js"
-
+import viewsRoutes from "./routes/views.routes.js";
 
 const app = express();
 
@@ -27,13 +26,16 @@ app.set("view engine", "hbs");
 app.set("views", `${__dirname}/views`);
 
 //Routes
+app.use((req, res, next) => {
+    req.io = io;
+    next();
+});
 app.use("/", viewsRoutes);
+app.use("/api", indexRoutes);
 
 const httpServer = app.listen(PORT, () => {
     console.log(`Escuchando en el puerto http://localhost:${PORT}`);
 });
-
-app.use("/api", indexRoutes);
 
 //Confirguracion Socket io
 const io = new Server(httpServer);
@@ -43,4 +45,4 @@ io.on("connection", (socket) => {
     socket.on("message", (data) => {
         console.log(data);
     });
-})
+});

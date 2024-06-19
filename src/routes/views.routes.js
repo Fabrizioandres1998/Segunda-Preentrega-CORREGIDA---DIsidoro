@@ -4,20 +4,47 @@ import path from "path";
 import __dirname from "../dirname.js";
 
 const router = Router();
+const productsFilePath = path.join(__dirname, "data", "products.json");
+
+const readProducts = () => {
+    return JSON.parse(fs.readFileSync(productsFilePath, "utf8"));
+};
+
+const writeProducts = (products) => {
+    fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2));
+};
 
 router.get("/", (req, res) => {
-    const productsFilePath = path.join(__dirname, "data", "products.json");
+    const products = readProducts();
+    res.render("home", { products });
+});
 
-    fs.readFile(productsFilePath, "utf8", (err, data) => {
-        if (err) {
-            console.error("Error al leer el archivo products.json", err);
-            res.status(500).send("Error al leer los productos");
-            return;
-        }
+router.get("/realtimeproducts", (req, res) => {
+    const products = readProducts();
+    res.render("realTimeProducts", { products });
+});
 
-        const products = JSON.parse(data);
-        res.render("home", { products });
-    });
+router.post("/products", (req, res) => {
+    const products = readProducts();
+    const newProduct = req.body;
+    newProduct.id = products.length ? products[products.length - 1].id + 1 : 1;
+    products.push(newProduct);
+    writeProducts(products);
+    
+    req.io.emit("productAdded", newProduct); // Emit event
+
+    res.status(201).send(newProduct);
+});
+
+router.delete("/products/:id", (req, res) => {
+    const productId = parseInt(req.params.id, 10);
+    const products = readProducts();
+    const newProducts = products.filter(product => product.id !== productId);
+    writeProducts(newProducts);
+    
+    req.io.emit("productDeleted", productId); // Emit event
+
+    res.status(200).send({ id: productId });
 });
 
 export default router;
