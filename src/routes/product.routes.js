@@ -56,6 +56,7 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
     const { id } = req.params;
     try {
+        console.log("eliminando producto from endpoint id: ", id)
         const deletedProduct = await productManager.deleteProduct(Number(id));
 
         // Emitir evento WebSocket para producto eliminado
