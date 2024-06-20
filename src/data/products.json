@@ -1,15 +1,5 @@
 [
   {
-    "id": 8,
-    "title": "Producto de prueba 10",
-    "description": "Este es un producto de prueba 10",
-    "price": 20000,
-    "thumbnail": "https://example.com/imagen.jpg",
-    "code": "PRD200",
-    "stock": 50,
-    "status": true
-  },
-  {
     "id": 12,
     "title": "Producto de prueba 1",
     "description": "Este es un producto de prueba 1",

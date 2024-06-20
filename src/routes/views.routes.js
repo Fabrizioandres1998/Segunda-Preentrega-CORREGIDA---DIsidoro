@@ -30,19 +30,26 @@ router.post("/products", (req, res) => {
     newProduct.id = products.length ? products[products.length - 1].id + 1 : 1;
     products.push(newProduct);
     writeProducts(products);
-    
+
     req.io.emit("productAdded", newProduct);
 
     res.status(201).send(newProduct);
 });
 
 router.delete("/products/:id", (req, res) => {
-    const productId = parseInt(req.params.id, 10);
-    const products = readProducts();
-    const newProducts = products.filter(product => product.id !== productId);
-    writeProducts(newProducts);
-    
-    req.io.emit("productDeleted", productId);
+    try {
+        const productId = parseInt(req.params.id, 10);
+        console.log("Eliminando producto id:", productId)
+        const products = readProducts();
+        const newProducts = products.filter(product => product.id !== productId);
+        writeProducts(newProducts);
+
+        req.io.emit("productDeleted", productId);
+
+        res.status(200).send({ id: productId });
+    } catch (error) {
+        console.log(error)
+    }
 
     res.status(200).send({ id: productId });
 });

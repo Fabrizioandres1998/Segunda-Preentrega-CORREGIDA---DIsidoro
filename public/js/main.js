@@ -2,18 +2,29 @@ const socket = io();
 console.log('Conectado al servidor de Socket.io');
 
 socket.on("productDeleted", (productId) => {
-    console.log(`Producto eliminado con ID ${productId}`);
-    const productItems = document.querySelectorAll("li");
-    productItems.forEach(item => {
-        if (item.textContent.includes(`codigo: ${productId}`)) {
-            item.remove();
+    try {
+        console.log(`Producto eliminado from socket con ID ${productId}`);
+
+        const productItem = document.getElementById(`${productId}`);
+        if (productItem) {
+            productItem.remove(); // Eliminar el elemento del DOM
+        } else {
+            console.log(`No se encontró el producto con ID ${productId} en el DOM`);
+
         }
-    });
+    } catch (error) {
+        console.log(error)
+    }
 });
 
 
 socket.on("productAdded", (newProduct) => {
-    const productItem = document.createElement("li");
-    productItem.textContent = `${newProduct.title} - $${newProduct.price} - ${newProduct.description} - codigo: ${newProduct.code}`;
-    document.querySelector("ul").appendChild(productItem);
+    try {
+        const productItem = document.createElement("li");
+        productItem.id = `${newProduct.id}`; // Asignar un ID único al elemento <li> basado en el ID del producto
+        productItem.textContent = `${newProduct.title} - $${newProduct.price} - ${newProduct.description} - Código: ${newProduct.code}`;
+        document.querySelector("ul").appendChild(productItem);
+    } catch (error) {
+        console.log(error)
+    }
 });
