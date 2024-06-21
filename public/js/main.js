@@ -7,7 +7,7 @@ socket.on("productDeleted", (productId) => {
 
         const productItem = document.getElementById(`${productId}`);
         if (productItem) {
-            productItem.remove(); // Eliminar el elemento del DOM
+            productItem.remove();
         } else {
             console.log(`No se encontró el producto con ID ${productId} en el DOM`);
 
@@ -21,8 +21,8 @@ socket.on("productDeleted", (productId) => {
 socket.on("productAdded", (newProduct) => {
     try {
         const productItem = document.createElement("li");
-        productItem.id = `${newProduct.id}`; // Asignar un ID único al elemento <li> basado en el ID del producto
-        productItem.textContent = `${newProduct.title} - $${newProduct.price} - ${newProduct.description} - Código: ${newProduct.code}`;
+        productItem.id = `${newProduct.id}`; 
+        productItem.textContent = `${newProduct.title} - $${newProduct.price} - ${newProduct.description} - Código: ${newProduct.code} - Stock: ${newProduct.stock}`;
         document.querySelector("ul").appendChild(productItem);
     } catch (error) {
         console.log(error)
