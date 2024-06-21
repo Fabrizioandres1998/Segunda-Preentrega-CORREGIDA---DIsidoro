@@ -17,11 +17,17 @@ socket.on("productDeleted", (productId) => {
     }
 });
 
+socket.on("productUpdated", (updatedProduct) => {
+    const productElement = document.getElementById(updatedProduct.id);
+    if (productElement) {
+        productElement.textContent = `${updatedProduct.title} - $${updatedProduct.price} - ${updatedProduct.description} - codigo: ${updatedProduct.code} - stock: ${updatedProduct.stock}`;
+    }
+});
 
 socket.on("productAdded", (newProduct) => {
     try {
         const productItem = document.createElement("li");
-        productItem.id = `${newProduct.id}`; 
+        productItem.id = `${newProduct.id}`;
         productItem.textContent = `${newProduct.title} - $${newProduct.price} - ${newProduct.description} - Código: ${newProduct.code} - Stock: ${newProduct.stock}`;
         document.querySelector("ul").appendChild(productItem);
     } catch (error) {

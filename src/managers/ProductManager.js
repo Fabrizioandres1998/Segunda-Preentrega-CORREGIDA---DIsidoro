@@ -12,7 +12,7 @@ class ProductManager {
             const data = await fs.promises.readFile(this.path, 'utf-8');
             return JSON.parse(data);
         } catch (error) {
-            return []; // En caso de error, retornar un array vacío
+            return []; 
         }
     }
 

@@ -3,10 +3,10 @@
     "id": 1,
     "title": "Nombre del Producto 1",
     "description": "Descripción del Producto 1",
-    "price": 130,
+    "price": 110,
     "thumbnail": "ruta/a/la/imagen1.jpg",
-    "code": "COD126",
-    "stock": 40,
+    "code": "COD116",
+    "stock": 10,
     "status": true
   },
   {
@@ -26,6 +26,16 @@
     "price": 330,
     "thumbnail": "ruta/a/la/imagen3.jpg",
     "code": "COD336",
+    "stock": 40,
+    "status": true
+  },
+  {
+    "id": 4,
+    "title": "Nombre del Producto 4",
+    "description": "Descripción del Producto 4",
+    "price": 440,
+    "thumbnail": "ruta/a/la/imagen4.jpg",
+    "code": "COD446",
     "stock": 40,
     "status": true
   }
